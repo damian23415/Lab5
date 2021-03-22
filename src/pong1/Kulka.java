@@ -9,13 +9,30 @@ public class Kulka {
     private double xSpeed;
     private double xPos;
     private double yPos;
+    private double radius;
+    private Color color;
 
-    Kulka(double xPos, double yPos, double xSpeed, double ySpeed) {
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    Kulka(double xPos, double yPos, double xSpeed, double ySpeed, double radius) {
         this.xPos = xPos;
         this.yPos = yPos;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.radius = radius;
     }
+
+    Kulka(double xPos, double yPos, double xSpeed, double ySpeed, double radius, Color color) {
+        this(xPos, yPos, xSpeed, ySpeed, radius);
+        this.color = color;
+    }
+
 
     public void checkBoundaryCollision(double xLeft, double yTop, double xRight, double yBottom) {
         if((xPos - R <= xLeft) || ((xPos + R >= xRight)))
@@ -25,7 +42,7 @@ public class Kulka {
     }
 
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.WHITESMOKE);
+        gc.setFill(color);
         gc.fillOval(xPos - R, yPos - R, 2 * R, 2 * R);
     }
 
