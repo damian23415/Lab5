@@ -66,8 +66,9 @@ public class Main extends Application {
     private void run(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDTH, ARENAHEIGHT);
-        initKule();
+
         for (int i = 0; i < LICZBAKULEK; i++) {
+            initKule();
             kulki[i].checkBoundaryCollision(ARENAX1, ARENAY1, ARENAX2, ARENAY2);
             kulki[i].update();
             kulki[i].draw(gc);
@@ -103,18 +104,19 @@ public class Main extends Application {
                     5 + lott.nextDouble() * 20,
                     5 + lott.nextDouble() * 20,
                     10,
-                    15
+                    15,
+                    10
             );
 
             //populacja mieszana
-            kulki[i] = new Kulka (
-                    lott.nextDouble() * ARENAWIDTH + ARENAX1,
-                    lott.nextDouble() * ARENAHEIGHT + ARENAY1,
-                    5 + lott.nextDouble() * 20,
-                    5 + lott.nextDouble() * 20,
-                    10,
-                    Color.RED
-            );
+//            kulki[i] = new Kulka (
+//                    lott.nextDouble() * ARENAWIDTH + ARENAX1,
+//                    lott.nextDouble() * ARENAHEIGHT + ARENAY1,
+//                    5 + lott.nextDouble() * 20,
+//                    5 + lott.nextDouble() * 20,
+//                    10,
+//                    Color.RED
+//            );
 
         }
     }
