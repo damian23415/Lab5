@@ -31,10 +31,16 @@ public class Main extends Application {
     private static final double ARENAY2 = ARENAY1 + ARENAHEIGHT;
     private static final double R = 10;
 
-    private double x = ARENAX1 + ARENAWIDTH / 2;
-    private double y = ARENAY1 + ARENAHEIGHT /2;
-    private double vx = 10;
-    private double vy = 4;
+//    private double x = ARENAX1 + ARENAWIDTH / 2;
+//    private double y = ARENAY1 + ARENAHEIGHT /2;
+//    private double vx = 10;
+//    private double vy = 4;
+
+    private static final int LICZBAKULEK = 10;
+    private double[] x = new double[LICZBAKULEK];
+    private double[] y = new double[LICZBAKULEK];
+    private double[] vx = new double [LICZBAKULEK];
+    private double[] vy = new double[LICZBAKULEK];
 
     @Override
     public void start(Stage stage) {
@@ -64,23 +70,31 @@ public class Main extends Application {
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDTH, ARENAHEIGHT);
 
-        if((x <= ARENAX1) || ((x >= ARENAX2))) vx = -vx;
-        if((y <= ARENAY1) || ((y >= ARENAY2))) vy = -vy;
+        for (int i = 0; i < LICZBAKULEK; i++) {
+            if((x[i] <= ARENAX1) || ((x[i] >= ARENAX2))) vx[i] = -vx[i];
+            if((y[i] <= ARENAY1) || ((y[i] >= ARENAY2))) vy[i] = -vy[i];
+        }
 
-        x += vx;
-        x += vy;
+        for (int i = 0; i < LICZBAKULEK; i++) {
+            x[i] += vx[i];
+            x[i] += vy[i];
+        }
 
-        gc.setFill((Color.WHITESMOKE));
-        gc.fillOval(x - R, y - R, 2 * R, 2 * R);
+        for (int i = 0; i < LICZBAKULEK; i++) {
+            gc.setFill((Color.WHITESMOKE));
+            gc.fillOval(x[i] - R, y[i] - R, 2 * R, 2 * R);
+        }
     }
 
     private void initKula() {
         Random lott = new Random();
-        x = lott.nextDouble() * ARENAWIDTH + ARENAX1;
-        y = lott.nextDouble() * ARENAHEIGHT + ARENAY1;
+        for (int i = 0; i < LICZBAKULEK; i++) {
+            x[i] = lott.nextDouble() * ARENAWIDTH + ARENAX1;
+            y[i] = lott.nextDouble() * ARENAHEIGHT + ARENAY1;
 
-        vx = 5 + lott.nextDouble() * 20;
-        vy = 5 + lott.nextDouble() * 20;
+            vx[i] = 5 + lott.nextDouble() * 20;
+            vy[i] = 5 + lott.nextDouble() * 20;
+        }
     }
 
 
