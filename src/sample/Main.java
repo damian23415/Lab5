@@ -17,6 +17,7 @@ import jdk.jfr.Event;
 import java.awt.*;
 import java.security.Key;
 import java.util.EventListener;
+import java.util.Random;
 
 public class Main extends Application {
     private static final double WIDTH = 800;
@@ -71,6 +72,15 @@ public class Main extends Application {
 
         gc.setFill((Color.WHITESMOKE));
         gc.fillOval(x - R, y - R, 2 * R, 2 * R);
+    }
+
+    private void initKula() {
+        Random lott = new Random();
+        x = lott.nextDouble() * ARENAWIDTH + ARENAX1;
+        y = lott.nextDouble() * ARENAHEIGHT + ARENAY1;
+
+        vx = 5 + lott.nextDouble() * 20;
+        vy = 5 + lott.nextDouble() * 20;
     }
 
 
