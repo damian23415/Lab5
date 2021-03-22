@@ -1,4 +1,4 @@
-package sample;
+package pong1;
 
 public class Controller {
 }

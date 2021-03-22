@@ -1,10 +1,8 @@
-package sample;
+package pong1;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
@@ -14,8 +12,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.util.Duration;
 import jdk.jfr.Event;
 
-import java.awt.*;
-import java.security.Key;
 import java.util.EventListener;
 import java.util.Random;
 
@@ -41,6 +37,7 @@ public class Main extends Application {
     private double[] y = new double[LICZBAKULEK];
     private double[] vx = new double [LICZBAKULEK];
     private double[] vy = new double[LICZBAKULEK];
+    private Kulka[] kulki = new Kulka[LICZBAKULEK];
 
     @Override
     public void start(Stage stage) {
@@ -69,31 +66,44 @@ public class Main extends Application {
     private void run(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDTH, ARENAHEIGHT);
-
+        initKule();
         for (int i = 0; i < LICZBAKULEK; i++) {
-            if((x[i] <= ARENAX1) || ((x[i] >= ARENAX2))) vx[i] = -vx[i];
-            if((y[i] <= ARENAY1) || ((y[i] >= ARENAY2))) vy[i] = -vy[i];
+            kulki[i].checkBoundaryCollision(ARENAX1, ARENAY1, ARENAX2, ARENAY2);
+            kulki[i].update();
+            kulki[i].draw(gc);
         }
 
-        for (int i = 0; i < LICZBAKULEK; i++) {
-            x[i] += vx[i];
-            x[i] += vy[i];
-        }
-
-        for (int i = 0; i < LICZBAKULEK; i++) {
-            gc.setFill((Color.WHITESMOKE));
-            gc.fillOval(x[i] - R, y[i] - R, 2 * R, 2 * R);
-        }
+//        for (int i = 0; i < LICZBAKULEK; i++) {
+//            if((x[i] <= ARENAX1) || ((x[i] >= ARENAX2))) vx[i] = -vx[i];
+//            if((y[i] <= ARENAY1) || ((y[i] >= ARENAY2))) vy[i] = -vy[i];
+//        }
+//
+//        for (int i = 0; i < LICZBAKULEK; i++) {
+//            x[i] += vx[i];
+//            x[i] += vy[i];
+//        }
+//
+//        for (int i = 0; i < LICZBAKULEK; i++) {
+//            gc.setFill((Color.WHITESMOKE));
+//            gc.fillOval(x[i] - R, y[i] - R, 2 * R, 2 * R);
+//        }
     }
 
-    private void initKula() {
+    private void initKule() {
         Random lott = new Random();
         for (int i = 0; i < LICZBAKULEK; i++) {
-            x[i] = lott.nextDouble() * ARENAWIDTH + ARENAX1;
-            y[i] = lott.nextDouble() * ARENAHEIGHT + ARENAY1;
+//            x[i] = lott.nextDouble() * ARENAWIDTH + ARENAX1;
+//            y[i] = lott.nextDouble() * ARENAHEIGHT + ARENAY1;
+//
+//            vx[i] = 5 + lott.nextDouble() * 20;
+//            vy[i] = 5 + lott.nextDouble() * 20;
+            kulki[i] = new Kulka (
+                    lott.nextDouble() * ARENAWIDTH + ARENAX1,
+                    lott.nextDouble() * ARENAHEIGHT + ARENAY1,
+                    5 + lott.nextDouble() * 20,
+                    5 + lott.nextDouble() * 20
+            );
 
-            vx[i] = 5 + lott.nextDouble() * 20;
-            vy[i] = 5 + lott.nextDouble() * 20;
         }
     }
 
