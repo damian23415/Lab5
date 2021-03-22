@@ -32,8 +32,8 @@ public class Main extends Application {
 
     private double x = ARENAX1 + ARENAWIDTH / 2;
     private double y = ARENAY1 + ARENAHEIGHT /2;
-    private double vx = 5;
-    private double vy = 2;
+    private double vx = 10;
+    private double vy = 4;
 
     @Override
     public void start(Stage stage) {
@@ -70,7 +70,7 @@ public class Main extends Application {
         x += vy;
 
         gc.setFill((Color.WHITESMOKE));
-        gc.fillOval(x, y, 2 * R, 2 * R);
+        gc.fillOval(x - R, y - R, 2 * R, 2 * R);
     }
 
 
