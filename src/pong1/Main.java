@@ -97,13 +97,23 @@ public class Main extends Application {
 //
 //            vx[i] = 5 + lott.nextDouble() * 20;
 //            vy[i] = 5 + lott.nextDouble() * 20;
+            kulki[i] = new Rugby (
+                    lott.nextDouble() * ARENAWIDTH + ARENAX1,
+                    lott.nextDouble() * ARENAHEIGHT + ARENAY1,
+                    5 + lott.nextDouble() * 20,
+                    5 + lott.nextDouble() * 20,
+                    10,
+                    15
+            );
+
+            //populacja mieszana
             kulki[i] = new Kulka (
                     lott.nextDouble() * ARENAWIDTH + ARENAX1,
                     lott.nextDouble() * ARENAHEIGHT + ARENAY1,
                     5 + lott.nextDouble() * 20,
                     5 + lott.nextDouble() * 20,
-                    25,
-                    Color.WHITESMOKE
+                    10,
+                    Color.RED
             );
 
         }
